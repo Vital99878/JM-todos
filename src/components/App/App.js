@@ -58,10 +58,26 @@ export default class App extends Component {
     } )
   }
 
+  add_new_todo = label => {
+    if ( label.length >= 3 ) {
+      this.setState( ( {todo_list} ) => {
+        let new_todo = {
+          label: label,
+          created: Date.now(),
+          id: Math.random() * 15875,
+          status: 'active'
+        }
+        return {
+          todo_list: [ ...todo_list, new_todo ]
+        }
+      } )
+    }
+  }
+
   render() {
     return (
     <section className="todoapp">
-      <Header/>
+      <Header add_new_todo={this.add_new_todo}/>
       <TaskList list_arr={this.state.todo_list}
                 toggle_status={this.toggle_status}
                 remove_todo={this.remove_todo}

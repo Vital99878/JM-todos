@@ -3,13 +3,14 @@ import './Task.css'
 import { formatDistance } from "date-fns"
 
 
-function Task( {label, created, toggle_status,remove_todo,  status, id} ) {
+function Task( {label, created, toggle_status, remove_todo,  status, id} ) {
 
   created = `created ${formatDistance( created, Date.now() )} ago`
+  let checked = status === 'completed'? 'checked': ''
 
   return (
   <div className={`view ${status}`}>
-    <input className="toggle" type="checkbox"
+    <input className="toggle" type="checkbox" checked = {checked}
            onClick={() => toggle_status(id)}/>
     <label>
       <span className="description">{label}</span>

@@ -28,7 +28,7 @@ export default class App extends Component {
         status: 'active'
       }
     ],
-    filter: "all" // all, active, completed
+    filter: "All" // all, active, completed
   }
 
   toggle_status = id => {
@@ -66,16 +66,8 @@ export default class App extends Component {
     } )
   }
 
-  show_all = () => {
-    this.setState( {filter: 'all'} )
-  }
-
-  show_active = () => {
-    this.setState( {filter: 'active'} )
-  }
-
-  show_completed = () => {
-    this.setState( {filter: 'completed'} )
+  toggle_filter = ( filter) => {
+    this.setState( {filter: filter} )
   }
 
   clear_completed = () => {
@@ -103,13 +95,7 @@ export default class App extends Component {
 
   render() {
     const {todo_list, filter} = this.state;
-    let show = {
-      show_all: this.show_all,
-      show_active: this.show_active,
-      show_completed: this.show_completed,
-      clear_completed: this.clear_completed,
-      filter: this.state.filter
-    }
+
     const visibleList = this.filter( todo_list, filter )
     const active_todos_count = todo_list.reduce( ( count, todo ) => {
       if ( todo.status === 'active' ) {
@@ -117,6 +103,7 @@ export default class App extends Component {
       }
       return count
     }, 0 )
+
     return (
     <section className="todoapp">
       <Header add_new_todo={this.add_new_todo}/>
@@ -124,7 +111,9 @@ export default class App extends Component {
                 toggle_status={this.toggle_status}
                 remove_todo={this.remove_todo}
       />
-      <Footer filters={show}
+      <Footer filter={filter}
+              clear_completed = {this.clear_completed}
+              toggle_filter={this.toggle_filter}
               active_todos_count={active_todos_count}/>
     </section>
     );

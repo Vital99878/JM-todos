@@ -1,9 +1,9 @@
-import React         from 'react'
+import React       from 'react'
 import './Header.css'
 import NewTaskForm from '../NewTaskForm/NewTaskForm'
 
 
-function Header({add_new_todo}) {
+function Header( {add_new_todo} ) {
   return (
   <header className='header'>
     <h1>todos</h1>
@@ -12,4 +12,4 @@ function Header({add_new_todo}) {
   );
 }
 
-export  default Header;
+export default Header;

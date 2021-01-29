@@ -28,7 +28,7 @@ export default class App extends Component {
         status: 'active'
       }
     ],
-    filter: "All" // all, active, completed
+    filter: "all" // all, active, completed
   }
 
   toggle_status = id => {
@@ -66,7 +66,7 @@ export default class App extends Component {
     } )
   }
 
-  toggle_filter = ( filter) => {
+  toggle_filter = ( filter ) => {
     this.setState( {filter: filter} )
   }
 
@@ -95,7 +95,6 @@ export default class App extends Component {
 
   render() {
     const {todo_list, filter} = this.state;
-
     const visibleList = this.filter( todo_list, filter )
     const active_todos_count = todo_list.reduce( ( count, todo ) => {
       if ( todo.status === 'active' ) {
@@ -109,10 +108,9 @@ export default class App extends Component {
       <Header add_new_todo={this.add_new_todo}/>
       <TaskList list_arr={visibleList}
                 toggle_status={this.toggle_status}
-                remove_todo={this.remove_todo}
-      />
+                remove_todo={this.remove_todo}/>
       <Footer filter={filter}
-              clear_completed = {this.clear_completed}
+              clear_completed={this.clear_completed}
               toggle_filter={this.toggle_filter}
               active_todos_count={active_todos_count}/>
     </section>

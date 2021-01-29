@@ -1,18 +1,24 @@
 import React, { Component } from 'react'
 import '../TasksFilter/TasksFilter.css'
+import PropTypes            from 'prop-types'
 
 
 export default class TaskFilter extends Component {
+  static defaultProps = {
+    filter: 'all'
+  }
+  static propTypes = {
+    filter: PropTypes.oneOf( [ 'all', 'active', 'completed' ] )
+  }
 
   render() {
     const {toggle_filter, filter} = this.props;
     const clazz_1 = filter !== 'all' ? '' : 'selected'
     const clazz_2 = filter !== 'active' ? '' : 'selected'
     const clazz_3 = filter !== 'completed' ? '' : 'selected'
-
-    let get_filter = (e) => {
+    const get_filter = ( e ) => {
       let filter = e.target.innerText.toLowerCase()
-      toggle_filter(filter)
+      toggle_filter( filter )
     }
 
     return (

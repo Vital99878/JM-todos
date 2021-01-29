@@ -12,7 +12,7 @@ function TaskList( {list_arr, toggle_status, remove_todo} ) {
     </li>
   } )
   return (
-  <section className='main'>
+    <section className='main'>
     <ul className="todo-list">
       {task_list}
     </ul>

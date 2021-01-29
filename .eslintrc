@@ -28,7 +28,7 @@
     "react/jsx-props-no-spreading": ["off"],
     "react/static-property-placement": "off",
     // check
-    "camelcase": "error",
+    "camelcase": "warn",
     "react/prop-types": "warn",
     "no-param-reassign": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]

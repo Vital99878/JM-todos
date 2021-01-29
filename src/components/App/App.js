@@ -32,19 +32,14 @@ export default class App extends Component {
   }
 
   toggle_status = id => {
-    this.setState( ( {todo_list} ) => {
-      let updated_todo_list = todo_list.map( todo => {
-        if ( todo.id === id ) {
-          if ( todo.status === 'active' ) {
-            todo.status = 'completed'
-          }
-        }
-        return todo
-      } )
-      return {
-        todo_list: updated_todo_list
+    const {todo_list} = this.state;
+    let updated_todo_list = todo_list.map( todo => {
+      if ( todo.id === id ) {
+        todo.status = todo.status === 'active' ? todo.status = 'completed' : 'active'
       }
+      return todo
     } )
+    this.setState( {todo_list: updated_todo_list} )
   }
 
   add_new_todo = label => {

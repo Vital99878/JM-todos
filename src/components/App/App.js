@@ -28,21 +28,20 @@ export default class App extends Component {
       },
     ],
     filter: 'all', // all, active, completed
-  }
+  };
 
   toggle_status = (id) => {
     const { todo_list } = this.state;
     const updated_todo_list = todo_list.map((todo) => {
       if (todo.id === id) {
-        todo.status = todo.status === 'active' ? todo.status = 'completed' : 'active';
+        todo.status = todo.status === 'active' ? (todo.status = 'completed') : 'active';
       }
       return todo;
     });
     this.setState({ todo_list: updated_todo_list });
-  }
+  };
 
   add_new_todo = (label) => {
-    console.log(label)
     if (label.length >= 3) {
       this.setState(({ todo_list }) => {
         const new_todo = {
@@ -56,23 +55,23 @@ export default class App extends Component {
         };
       });
     }
-  }
+  };
 
   remove_todo = (id) => {
     this.setState(({ todo_list }) => ({
       todo_list: todo_list.filter((todo) => todo.id !== id),
     }));
-  }
+  };
 
   toggle_filter = (filter) => {
     this.setState({ filter });
-  }
+  };
 
   clear_completed = () => {
     this.setState(({ todo_list }) => ({
       todo_list: todo_list.filter((item) => item.status !== 'completed'),
     }));
-  }
+  };
 
   filter = (items, filter) => {
     switch (filter) {
@@ -92,7 +91,7 @@ export default class App extends Component {
     const visibleList = this.filter(todo_list, filter);
     const active_todos_count = todo_list.reduce((count, todo) => {
       if (todo.status === 'active') {
-        count++;
+        count += 1;
       }
       return count;
     }, 0);
@@ -100,11 +99,7 @@ export default class App extends Component {
     return (
       <section className="todoapp">
         <Header add_new_todo={this.add_new_todo} />
-        <TaskList
-          list_arr={visibleList}
-          toggle_status={this.toggle_status}
-          remove_todo={this.remove_todo}
-        />
+        <TaskList list_arr={visibleList} toggle_status={this.toggle_status} remove_todo={this.remove_todo} />
         <Footer
           filter={filter}
           clear_completed={this.clear_completed}

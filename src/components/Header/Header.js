@@ -3,11 +3,11 @@ import './Header.css'
 import NewTaskForm from '../NewTaskForm/NewTaskForm'
 
 
-function Header() {
+function Header({add_new_todo}) {
   return (
   <header className='header'>
     <h1>todos</h1>
-    <NewTaskForm/>
+    <NewTaskForm add_new_todo={add_new_todo}/>
   </header>
   );
 }

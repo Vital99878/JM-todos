@@ -27,6 +27,7 @@ export default class App extends Component {
         id: 3,
         status: 'active'
       }
+
     ],
     filter: "All" // all, active, completed
   }
@@ -62,9 +63,11 @@ export default class App extends Component {
     this.setState( ( {todo_list} ) => {
       return {
         todo_list: todo_list.filter( todo => todo.id !== id )
+
       }
     } )
   }
+
 
   toggle_filter = ( filter) => {
     this.setState( {filter: filter} )
@@ -74,9 +77,11 @@ export default class App extends Component {
     this.setState( ( {todo_list} ) => {
       return {
         todo_list: todo_list.filter( item => item.status !== 'completed' )
+
       }
     } )
   }
+
 
   filter = ( items, filter ) => {
     switch ( filter ) {
@@ -119,3 +124,4 @@ export default class App extends Component {
     );
   }
 }
+

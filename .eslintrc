@@ -22,12 +22,18 @@
         "assert": "either"
       }
     ],
+    // rules off
     "react/state-in-constructor": ["off"],
     "react/jsx-props-no-spreading": ["off"],
     "react/static-property-placement": "off",
+    "no-unused-vars": "off",
     // my rules added
-    "camelcase": "off", //
     "react/jsx-filename-extension": "off",
+    "camelcase": "off", //
+    "react/jsx-pascal-case": "off",
+    "no-nested-ternary": "off",
+    "prefer-rest-params": "off",
+    "no-underscore-dangle": "off",
     "no-param-reassign": "off"
   },
   "settings": {

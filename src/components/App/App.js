@@ -99,7 +99,7 @@ export default class App extends Component {
     return (
       <section className="todoapp">
         <Header add_new_todo={this.add_new_todo} />
-        <TaskList list_arr={visibleList} toggle_status={this.toggle_status} remove_todo={this.remove_todo} />
+        <TaskList todos={visibleList} toggle_status={this.toggle_status} remove_todo={this.remove_todo} />
         <Footer
           filter={filter}
           clear_completed={this.clear_completed}

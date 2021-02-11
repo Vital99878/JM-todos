@@ -2,16 +2,18 @@ import React from 'react';
 import './Task.css';
 import PropTypes from 'prop-types';
 import { formatDistance } from 'date-fns';
+import Time_Manager from '../TitmeManager';
 
-function Task({ label, created, toggle_status, remove_todo, status, id }) {
+function Task({ label, created, toggle_status, remove_todo, status, id, min, sec }) {
   const create = `created ${formatDistance(created, Date.now())} ago`;
   const checked = status === 'completed' ? 'checked' : '';
 
   return (
     <div className={`view ${status}`}>
       <input className="toggle" type="checkbox" defaultChecked={checked} onClick={() => toggle_status(id)} />
-      <label>
+      <label className="view__description">
         <span className="description">{label}</span>
+        <Time_Manager min={min} sec={sec} />
         <span className="created">{create}</span>
       </label>
       <button className="icon icon-edit" type="button" aria-label="Edit" />
@@ -33,5 +35,7 @@ Task.propTypes = {
   remove_todo: PropTypes.func.isRequired,
   status: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
+  min: PropTypes.number.isRequired,
+  sec: PropTypes.number.isRequired,
 };
 export default Task;

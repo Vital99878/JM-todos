@@ -20,7 +20,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix --color",
-    "format": "pretty-quick"
+    "prettier": "prettier --write"
   },
   "browserslist": {
     "production": [

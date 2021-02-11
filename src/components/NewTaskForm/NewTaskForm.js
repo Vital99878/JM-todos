@@ -2,28 +2,30 @@ import React, { Component } from 'react';
 import './NewTaskForm.css';
 import PropTypes from 'prop-types';
 
-
 export default class NewTaskForm extends Component {
-  state = { label: '' };
+  state = { label: '', min: '', sec: '' };
 
   onSubmit = (event) => {
     event.preventDefault();
-    const { label } = this.state;
+    const { label, min, sec } = this.state;
     const { add_new_todo } = this.props;
-    add_new_todo(label);
-    this.setState({ label: '' });
+    add_new_todo(label, +min, +sec);
+    this.setState({ label: '', min: '', sec: '' });
   };
 
   get_label = (event) => {
-    const label = event.target.value;
-    this.setState(() => ({ label }));
+    const { name, value } = event.target;
+    this.setState(() => ({ [name]: value }));
   };
 
   render() {
-    const { label } = this.state;
+    const { label, min, sec } = this.state;
     return (
-      <form onSubmit={this.onSubmit}>
-        <input className="new-todo" placeholder="What needs to be done?" onChange={this.get_label} value={label} />
+      <form className="new-task" onSubmit={this.onSubmit}>
+        <input className="new-todo" name="label" placeholder="Task" onChange={this.get_label} value={label} />
+        <input className="new-todo" name="min" type="number" placeholder="Min" onChange={this.get_label} value={min} />
+        <input className="new-todo" name="sec" type="number" placeholder="Sec" onChange={this.get_label} value={sec} />
+        <input className="new-todo__submit" type="submit" />
       </form>
     );
   }

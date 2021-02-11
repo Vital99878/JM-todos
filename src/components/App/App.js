@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-
+import Header from '../Header';
+import TaskList from '../TaskList';
+import Footer from '../Footer';
 import Header from '../Header';
 import TaskList from '../TaskList';
 import Footer from '../Footer';
@@ -21,7 +23,7 @@ export default class App extends Component {
         created: new Date(2020, 11, 12, 14, 55),
         id: 52,
         status: 'active',
-        min: 10,
+        min: 8,
         sec: 30,
       },
       {

@@ -29,7 +29,6 @@ label .description {
 
 .view__description {
   width: 100%;
-  /*background-color: #af5b5e;*/
   display: flex;
   justify-content: space-between;
   justify-self: flex-end;

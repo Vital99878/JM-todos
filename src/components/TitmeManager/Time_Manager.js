@@ -8,6 +8,11 @@ class Time_Manager extends React.Component {
     interval: false,
   };
 
+  componentDidMount() {
+    const { min, sec } = this.props;
+    this.setState({ total_seconds: min * 60 + sec });
+  }
+
   componentWillUnmount() {
     const { interval } = this.state;
     clearInterval(interval);
@@ -15,13 +20,20 @@ class Time_Manager extends React.Component {
 
   render() {
     const run_time = () => {
-      const { total_seconds } = this.state;
+      const { total_seconds, interval } = this.state;
+      if (total_seconds === 0) {
+        return;
+      }
+      if (total_seconds === 1) {
+        clearInterval(interval);
+      }
       this.setState(() => ({
-        total_seconds: total_seconds + 1,
+        total_seconds: total_seconds - 1,
       }));
     };
 
     let { total_seconds } = this.state;
+
     const minutes = total_seconds / 60 < 10 ? `0${Math.floor(total_seconds / 60)}` : Math.floor(total_seconds / 60);
 
     const seconds = total_seconds % 60 < 10 ? (total_seconds = `0${total_seconds % 60}`) : total_seconds % 60;
@@ -58,6 +70,12 @@ class Time_Manager extends React.Component {
   }
 }
 
-Time_Manager.defaultProp = {};
-Time_Manager.propTypes = {};
+Time_Manager.defaultProp = {
+  //  min: 0,
+  //  sec: 0
+};
+Time_Manager.propTypes = {
+  min: PropTypes.number.isRequired,
+  sec: PropTypes.number.isRequired,
+};
 export default Time_Manager;

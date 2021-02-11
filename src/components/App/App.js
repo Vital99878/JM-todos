@@ -13,18 +13,24 @@ export default class App extends Component {
         created: new Date(2021, 0, 25, 14, 55),
         id: 11,
         status: 'active',
+        min: 10,
+        sec: 30,
       },
       {
         label: 'Editing task',
         created: new Date(2020, 11, 12, 14, 55),
         id: 52,
         status: 'active',
+        min: 10,
+        sec: 30,
       },
       {
         label: 'Active task',
         created: new Date(2021, 0, 20, 10, 55),
         id: 3,
         status: 'active',
+        min: 0,
+        sec: 3,
       },
     ],
     filter: 'all', // all, active, completed
@@ -41,14 +47,16 @@ export default class App extends Component {
     this.setState({ todo_list: updated_todo_list });
   };
 
-  add_new_todo = (label) => {
-    if (label.length >= 3) {
+  add_new_todo = (label, min, sec) => {
+    if (label.length > 2 && sec > 2) {
       this.setState(({ todo_list }) => {
         const new_todo = {
           label,
           created: Date.now(),
           id: Math.random() * 15875,
           status: 'active',
+          min,
+          sec,
         };
         return {
           todo_list: [...todo_list, new_todo],

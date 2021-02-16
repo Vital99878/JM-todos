@@ -84,6 +84,18 @@ const App = () => {
     }
   };
 
+  const set_total_seconds = (secs, id) => {
+    // eslint-disable-next-line no-shadow
+    setTodos((todos) =>
+      todos.map((todo) => {
+        if (todo.id === id) {
+          todo.sec = secs;
+        }
+        return todo;
+      })
+    );
+  };
+
   const visibleList = filtered(todo_list, filter);
   const active_todos_count = todo_list.reduce((count, todo) => {
     if (todo.status === 'active') {
@@ -95,7 +107,12 @@ const App = () => {
   return (
     <section className="todoapp">
       <Header add_new_todo={add_new_todo} />
-      <TaskList todos={visibleList} toggle_status={toggle_status} remove_todo={remove_todo} />
+      <TaskList
+        todos={visibleList}
+        toggle_status={toggle_status}
+        remove_todo={remove_todo}
+        set_total_seconds={set_total_seconds}
+      />
       <Footer
         filter={filter}
         clear_completed={clear_completed}

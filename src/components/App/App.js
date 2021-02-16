@@ -89,7 +89,8 @@ const App = () => {
     setTodos((todos) =>
       todos.map((todo) => {
         if (todo.id === id) {
-          todo.sec = secs;
+          todo.min = secs % 60;
+          todo.sec = secs - (secs % 60) * 60;
         }
         return todo;
       })

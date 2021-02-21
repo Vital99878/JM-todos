@@ -35,7 +35,8 @@
     "no-nested-ternary": "off",
     "prefer-rest-params": "off",
     "no-underscore-dangle": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "no-shadow": "off"
   },
   "settings": {
     "react": {

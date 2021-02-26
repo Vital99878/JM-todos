@@ -7,7 +7,7 @@ import Footer from '../Footer';
 const App = () => {
   const [todo_list, setTodos] = useState([
     {
-      label: 'Completed task',
+      label: 'Active task',
       created: new Date(2021, 0, 25, 14, 55),
       id: 11,
       status: 'active',
@@ -15,7 +15,7 @@ const App = () => {
       sec: 30,
     },
     {
-      label: 'Editing task',
+      label: 'Completed task',
       created: new Date(2020, 11, 12, 14, 55),
       id: 52,
       status: 'completed',

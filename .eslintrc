@@ -27,6 +27,7 @@
     "react/jsx-props-no-spreading": ["off"],
     "react/static-property-placement": "off",
     "no-unused-vars": "off",
+    "react-hooks/exhaustive-deps": "off",
     // my rules added
     "react/jsx-filename-extension": "off",
     "camelcase": "off", //
@@ -34,7 +35,8 @@
     "no-nested-ternary": "off",
     "prefer-rest-params": "off",
     "no-underscore-dangle": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "no-shadow": "off"
   },
   "settings": {
     "react": {

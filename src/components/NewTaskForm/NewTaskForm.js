@@ -1,36 +1,32 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './NewTaskForm.css';
 import PropTypes from 'prop-types';
 
-export default class NewTaskForm extends Component {
-  state = { label: '', min: '', sec: '' };
+const NewTaskForm = ({ add_new_todo }) => {
+  const [new_task_data, setNewTaskData] = useState({ label: '', min: '', sec: '' });
+  const { label, min, sec } = new_task_data;
 
-  onSubmit = (event) => {
+  const onSubmit = (event) => {
     event.preventDefault();
-    const { label, min, sec } = this.state;
-    const { add_new_todo } = this.props;
     add_new_todo(label, +min, +sec);
-    this.setState({ label: '', min: '', sec: '' });
+    setNewTaskData({ label: '', min: '', sec: '' });
   };
 
-  get_label = (event) => {
+  const get_label = (event) => {
     const { name, value } = event.target;
-    this.setState(() => ({ [name]: value }));
+    setNewTaskData({ ...new_task_data, ...{ [name]: value } });
   };
 
-  render() {
-    const { label, min, sec } = this.state;
-    return (
-      <form className="new-task" onSubmit={this.onSubmit}>
-        <input className="new-todo" name="label" placeholder="Task" onChange={this.get_label} value={label} />
-        <input className="new-todo" name="min" type="number" placeholder="Min" onChange={this.get_label} value={min} />
-        <input className="new-todo" name="sec" type="number" placeholder="Sec" onChange={this.get_label} value={sec} />
-        <input className="new-todo__submit" type="submit" />
-      </form>
-    );
-  }
-}
-
+  return (
+    <form className="new-task" onSubmit={onSubmit}>
+      <input className="new-todo" name="label" placeholder="Task" onChange={get_label} value={label} />
+      <input className="new-todo" name="min" type="number" placeholder="Min" onChange={get_label} value={min} />
+      <input className="new-todo" name="sec" type="number" placeholder="Sec" onChange={get_label} value={sec} />
+      <input className="new-todo__submit" type="submit" />
+    </form>
+  );
+};
+export default NewTaskForm;
 NewTaskForm.propTypes = {
   add_new_todo: PropTypes.func.isRequired,
 };

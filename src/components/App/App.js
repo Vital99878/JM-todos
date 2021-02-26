@@ -1,111 +1,107 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import './App.css';
 import Header from '../Header';
 import TaskList from '../TaskList';
 import Footer from '../Footer';
 
-export default class App extends Component {
-  state = {
-    todo_list: [
-      {
-        label: 'Completed task',
-        created: new Date(2021, 0, 25, 14, 55),
-        id: 11,
-        status: 'active',
-      },
-      {
-        label: 'Editing task',
-        created: new Date(2020, 11, 12, 14, 55),
-        id: 52,
-        status: 'active',
-      },
-      {
-        label: 'Active task',
-        created: new Date(2021, 0, 20, 10, 55),
-        id: 3,
-        status: 'active',
-      },
-    ],
-    filter: 'all', // all, active, completed
-  };
+const App = () => {
+  const [todo_list, setTodos] = useState([
+    {
+      label: 'Completed task',
+      created: new Date(2021, 0, 25, 14, 55),
+      id: 11,
+      status: 'active',
+      min: 10,
+      sec: 30,
+    },
+    {
+      label: 'Editing task',
+      created: new Date(2020, 11, 12, 14, 55),
+      id: 52,
+      status: 'completed',
+      min: 8,
+      sec: 30,
+    },
+    {
+      label: 'Active task',
+      created: new Date(2021, 0, 20, 10, 55),
+      id: 3,
+      status: 'active',
+      min: 0,
+      sec: 3,
+    },
+  ]);
+  const [filter, setFilter] = useState('all');
 
-  toggle_status = (id) => {
-    const { todo_list } = this.state;
+  const toggle_status = (id) => {
     const updated_todo_list = todo_list.map((todo) => {
       if (todo.id === id) {
         todo.status = todo.status === 'active' ? (todo.status = 'completed') : 'active';
       }
       return todo;
     });
-    this.setState({ todo_list: updated_todo_list });
+    setTodos(updated_todo_list);
   };
 
-  add_new_todo = (label) => {
-    if (label.length >= 3) {
-      this.setState(({ todo_list }) => {
-        const new_todo = {
-          label,
-          created: Date.now(),
-          id: Math.random() * 15875,
-          status: 'active',
-        };
-        return {
-          todo_list: [...todo_list, new_todo],
-        };
-      });
+  const add_new_todo = (label, min, sec) => {
+    if (label.length > 2 && ((min === 0 && sec > 2) || min > 0)) {
+      const new_todo = {
+        label,
+        created: Date.now(),
+        id: Math.random() * 15875,
+        status: 'active',
+        min,
+        sec,
+      };
+      setTodos([...todo_list, new_todo]);
     }
   };
 
-  remove_todo = (id) => {
-    this.setState(({ todo_list }) => ({
-      todo_list: todo_list.filter((todo) => todo.id !== id),
-    }));
+  const remove_todo = (id) => {
+    setTodos(todo_list.filter((todo) => todo.id !== id));
   };
 
-  toggle_filter = (filter) => {
-    this.setState({ filter });
+  const toggle_filter = (filter) => {
+    setFilter(filter);
   };
 
-  clear_completed = () => {
-    this.setState(({ todo_list }) => ({
-      todo_list: todo_list.filter((item) => item.status !== 'completed'),
-    }));
+  const clear_completed = () => {
+    setTodos(todo_list.filter((item) => item.status !== 'completed'));
   };
 
-  filter = (items, filter) => {
+  const filtered = (todos, filter) => {
     switch (filter) {
       case 'all':
-        return items;
+        return todos;
       case 'active':
-        return items.filter((item) => item.status === 'active');
+        return todos.filter((item) => item.status === 'active');
       case 'completed':
-        return items.filter((item) => item.status === 'completed');
+        return todos.filter((item) => item.status === 'completed');
       default:
-        return items;
+        return todos;
     }
   };
 
-  render() {
-    const { todo_list, filter } = this.state;
-    const visibleList = this.filter(todo_list, filter);
-    const active_todos_count = todo_list.reduce((count, todo) => {
-      if (todo.status === 'active') {
-        count += 1;
-      }
-      return count;
-    }, 0);
+  const visibleList = filtered(todo_list, filter);
+  const active_todos_count = todo_list.reduce((count, todo) => {
+    if (todo.status === 'active') {
+      count += 1;
+    }
+    return count;
+  }, 0);
 
-    return (
-      <section className="todoapp">
-        <Header add_new_todo={this.add_new_todo} />
-        <TaskList list_arr={visibleList} toggle_status={this.toggle_status} remove_todo={this.remove_todo} />
-        <Footer
-          filter={filter}
-          clear_completed={this.clear_completed}
-          toggle_filter={this.toggle_filter}
-          active_todos_count={active_todos_count}
-        />
-      </section>
-    );
-  }
-}
+  return (
+    <section className="todoapp">
+      <Header add_new_todo={add_new_todo} />
+      <TaskList todos={visibleList} toggle_status={toggle_status} remove_todo={remove_todo} />
+      <Footer
+        filter={filter}
+        clear_completed={clear_completed}
+        toggle_filter={toggle_filter}
+        active_todos_count={active_todos_count}
+      />
+    </section>
+  );
+};
+
+export default App;
